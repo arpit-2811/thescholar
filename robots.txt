@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://scholarsacademy.in/sitemap.xml
+Sitemap: https://thescholarsacademy.in/sitemap.xml
+
