@@ -119,13 +119,13 @@
             🎉 Thank you! Your enquiry has been submitted. We will call you within 24 hours.
           </div>
 
-          <form id="enquiryForm" action="https://formsubmit.co/thescholars76@gmail.com" method="POST" novalidate>
-            <!-- Formsubmit config -->
-            <input type="hidden" name="_subject" value="📋 New Enquiry – The Scholars Academy" />
-            <input type="hidden" name="_captcha" value="false" />
-            <input type="hidden" name="_template" value="table" />
-            <input type="hidden" name="_next" value="https://thescholarsacademy.in/enquiry.html?sent=true" />
-            <input type="text" name="_honey" style="display:none" />
+          <form id="enquiryForm" action="https://api.web3forms.com/submit" method="POST" novalidate>
+            <!-- Web3Forms config -->
+            <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+            <input type="hidden" name="subject" value="New Enquiry – The Scholars Academy" />
+            <input type="hidden" name="from_name" value="The Scholars Academy Website" />
+            <input type="hidden" name="redirect" value="https://thescholarsacademy.in/enquiry.html?sent=true" />
+            <input type="checkbox" name="botcheck" style="display:none" />
             <div class="form-grid">
               <!-- Student Name -->
               <div class="form-group">
