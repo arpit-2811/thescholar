@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enquiry – The Scholars Academy, Gopalganj</title>
+  <meta name="description" content="Fill out the enquiry form to get free counselling for IIT JEE, NEET, Foundation and board exam coaching at The Scholars Academy, Gopalganj." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner container">
+      <a href="index.html" class="nav-logo">
+        <img src="thescholarslogo.png" alt="The Scholars Academy Logo" class="nav-logo-img" />
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#courses">Courses</a></li>
+        <li><a href="index.html#features">Why Us</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li><a href="enquiry.html" class="nav-cta">Enquire Now</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===== ENQUIRY HERO ===== -->
+  <section class="enquiry-hero">
+    <div class="container enquiry-hero-inner">
+      <span class="section-tag light-tag">Free Counselling</span>
+      <h1 class="hero-title" style="font-size:clamp(1.8rem,5vw,3.5rem); margin-bottom:0.75rem;">
+        Begin Your <span class="gold-gradient">Scholar's Journey</span>
+      </h1>
+      <p style="color:rgba(255,255,255,0.7); font-size:1.05rem; max-width:540px;">
+        Fill in the form below and our counselling team will reach out within 24 hours to guide you through the perfect course.
+      </p>
+    </div>
+    <div class="hero-wave">
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#f8f9ff"/></svg>
+    </div>
+  </section>
+
+  <!-- ===== ENQUIRY FORM ===== -->
+  <section class="enquiry-form-section">
+    <div class="container">
+      <div class="enquiry-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="form-sidebar">
+          <div class="sidebar-card">
+            <h4>📚 Courses Available</h4>
+            <ul>
+              <li>Classes 1–5 (All Subjects)</li>
+              <li>Classes 6–10 (Sci, Maths, SST, English)</li>
+              <li>Classes 11–12 BSEB & CBSE</li>
+              <li>IIT JEE Mains & Advanced</li>
+              <li>NEET UG Preparation</li>
+              <li>Foundation & Pre-Foundation</li>
+            </ul>
+          </div>
+          <div class="sidebar-card">
+            <h4>✅ Why Enquire With Us</h4>
+            <ul>
+              <li>Free counselling session</li>
+              <li>Demo class available</li>
+              <li>Flexible batch timings</li>
+              <li>Expert faculty guidance</li>
+              <li>Affordable fee structure</li>
+              <li>No obligation, just clarity</li>
+            </ul>
+          </div>
+          <div class="sidebar-card">
+            <h4>📞 Quick Contact</h4>
+            <div class="contact-shortcut">
+              <div class="cs-item">
+                <div class="ci-icon">📞</div>
+                <div>
+                  <strong><a href="tel:+918935892735" style="color:var(--blue-mid);text-decoration:none">+91 89358 92735</a></strong>
+                  <span>Mon–Sat, 7AM–8PM</span>
+                </div>
+              </div>
+              <div class="cs-item">
+                <div class="ci-icon">📍</div>
+                <div>
+                  <strong>Our Campus</strong>
+                  <span>Rajwahi Colony, Gopalganj</span>
+                </div>
+              </div>
+              <div class="cs-item">
+                <div class="ci-icon">✉️</div>
+                <div>
+                  <strong><a href="mailto:thescholars76@gmail.com" style="color:var(--blue-mid);text-decoration:none">Email Us</a></strong>
+                  <span>thescholars76@gmail.com</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- FORM -->
+        <div class="enquiry-form-card">
+          <h2 class="form-title">Enquiry Form</h2>
+          <p class="form-subtitle">Fill in your details — our team will contact you shortly for free guidance.</p>
+
+          <div class="success-msg" id="successMsg">
+            🎉 Thank you! Your enquiry has been submitted. We will call you within 24 hours.
+          </div>
+
+          <form id="enquiryForm" novalidate>
+            <!-- Formsubmit config (no account/domain required) -->
+            <input type="hidden" name="_subject" value="📋 New Enquiry – The Scholars Academy" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="text" name="_honey" style="display:none" />
+            <div class="form-grid">
+              <!-- Student Name -->
+              <div class="form-group">
+                <label for="studentName">Student's Full Name *</label>
+                <input type="text" id="studentName" name="studentName" placeholder="Enter student's name" autocomplete="name" required />
+              </div>
+              <!-- Parent Name -->
+              <div class="form-group">
+                <label for="parentName">Parent / Guardian Name *</label>
+                <input type="text" id="parentName" name="parentName" placeholder="Enter parent's name" autocomplete="name" required />
+              </div>
+              <!-- Phone -->
+              <div class="form-group">
+                <label for="phone">Contact Number *</label>
+                <input type="tel" id="phone" name="phone" placeholder="+91 XXXXX XXXXX" autocomplete="tel" required />
+              </div>
+              <!-- Alternate Phone -->
+              <div class="form-group">
+                <label for="altPhone">Alternate Number</label>
+                <input type="tel" id="altPhone" name="altPhone" placeholder="+91 XXXXX XXXXX" autocomplete="tel" />
+              </div>
+              <!-- Email -->
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="example@email.com" autocomplete="email" />
+              </div>
+              <!-- Class -->
+              <div class="form-group">
+                <label for="classApplied">Applying for Class *</label>
+                <select id="classApplied" name="classApplied" required>
+                  <option value="" disabled selected>Select class</option>
+                  <option>Class 1</option>
+                  <option>Class 2</option>
+                  <option>Class 3</option>
+                  <option>Class 4</option>
+                  <option>Class 5</option>
+                  <option>Class 6</option>
+                  <option>Class 7</option>
+                  <option>Class 8</option>
+                  <option>Class 9</option>
+                  <option>Class 10</option>
+                  <option>Class 11</option>
+                  <option>Class 12</option>
+                </select>
+              </div>
+              <!-- Course -->
+              <div class="form-group">
+                <label for="course">Course Interested In *</label>
+                <select id="course" name="course" required>
+                  <option value="" disabled selected>Select course</option>
+                  <option>All Subjects (Class 1–5)</option>
+                  <option>Science, Maths, SST, English (Class 6–10)</option>
+                  <option>Class 11–12 (BSEB Board)</option>
+                  <option>Class 11–12 (CBSE Board)</option>
+                  <option>IIT JEE (Mains & Advanced)</option>
+                  <option>NEET UG Preparation</option>
+                  <option>Foundation Batch</option>
+                  <option>Pre-Foundation Batch</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <!-- Board -->
+              <div class="form-group">
+                <label for="board">Current School Board</label>
+                <select id="board" name="board">
+                  <option value="" disabled selected>Select board</option>
+                  <option>BSEB (Bihar Board)</option>
+                  <option>CBSE</option>
+                  <option>ICSE</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <!-- City -->
+              <div class="form-group">
+                <label for="city">City / Area</label>
+                <input type="text" id="city" name="city" placeholder="e.g. Gopalganj" autocomplete="address-level2" />
+              </div>
+              <!-- How did you hear -->
+              <div class="form-group">
+                <label for="source">How did you hear about us?</label>
+                <select id="source" name="source">
+                  <option value="" disabled selected>Select</option>
+                  <option>Friend / Family</option>
+                  <option>Social Media</option>
+                  <option>Pamphlet / Poster</option>
+                  <option>Google Search</option>
+                  <option>Word of Mouth</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <!-- Message -->
+              <div class="form-group full">
+                <label for="message">Additional Message / Questions</label>
+                <textarea id="message" name="message" placeholder="Tell us anything specific — preferred batch timings, subjects of concern, or any questions you have."></textarea>
+              </div>
+            </div>
+
+            <div class="form-submit">
+              <button type="submit" class="btn-submit" id="submitBtn">
+                <span>Submit Enquiry</span>
+                <span>🚀</span>
+              </button>
+              <p class="form-note">🔒 Your information is private and will only be used to contact you regarding your enquiry.</p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MINI FEATURES ===== -->
+  <section class="features section-pad" style="padding: 4rem 0;">
+    <div class="features-bg"></div>
+    <div class="container" style="position:relative;z-index:1;text-align:center;">
+      <h2 class="section-title light-title" style="margin-bottom:0.5rem;">Why <span class="gold-gradient">The Scholars Academy?</span></h2>
+      <p style="color:rgba(255,255,255,0.65); margin-bottom:3rem; font-size:0.95rem;">Join Gopalganj's most trusted coaching institute</p>
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:1.5rem;">
+        <div class="feature-item">
+          <div class="feature-icon">🎯</div>
+          <h3>Result-Oriented</h3>
+          <p>Proven track record of board toppers and competitive exam qualifiers.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🧑‍🏫</div>
+          <h3>Expert Faculty</h3>
+          <p>Experienced and caring teachers with deep subject mastery.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">📅</div>
+          <h3>Flexible Batches</h3>
+          <p>Morning & evening batches designed around school timetables.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">💰</div>
+          <h3>Affordable Fees</h3>
+          <p>Quality education accessible to every family in Gopalganj.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo">
+          <img src="thescholarslogo.png" alt="The Scholars Academy Logo" class="footer-logo-img" />
+        </div>
+        <p class="footer-tagline">Nurturing Excellence & Knowledge</p>
+        <p class="footer-addr">Rajwahi Colony, Gopalganj, Bihar</p>
+      </div>
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#about">About Us</a></li>
+          <li><a href="index.html#courses">Courses</a></li>
+          <li><a href="index.html#features">Why Us</a></li>
+          <li><a href="enquiry.html">Enquire Now</a></li>
+        </ul>
+      </div>
+      <div class="footer-courses">
+        <h4>Programs</h4>
+        <ul>
+          <li><a href="index.html#courses">Classes 1–5</a></li>
+          <li><a href="index.html#courses">Classes 6–10</a></li>
+          <li><a href="index.html#courses">Classes 11–12 BSEB & CBSE</a></li>
+          <li><a href="index.html#courses">IIT JEE Coaching</a></li>
+          <li><a href="index.html#courses">NEET Coaching</a></li>
+          <li><a href="index.html#courses">Foundation & Pre-Foundation</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact-col">
+        <h4>Get in Touch</h4>
+        <p>📞 +91 89358 92735</p>
+        <p>✉️ thescholars76@gmail.com</p>
+        <p>📍 Yadarpur, Gopalganj</p>
+        <a href="tel:+918935892735" class="btn btn-gold" style="margin-top:1rem;padding:0.6rem 1.4rem;font-size:0.9rem">Call Now 📞</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 The Scholars Academy. All rights reserved. | Designed with ❤️ for Gopalganj</p>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
+
+
