@@ -122,8 +122,17 @@ const enquiryForm = document.getElementById('enquiryForm');
 const successMsg  = document.getElementById('successMsg');
 const submitBtn   = document.getElementById('submitBtn');
 
+// ===== SHOW SUCCESS IF REDIRECTED BACK FROM FORMSUBMIT =====
+if (window.location.search.includes('sent=true') && successMsg) {
+  successMsg.classList.add('show');
+  successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  // Clean up the URL
+  window.history.replaceState({}, document.title, window.location.pathname);
+}
+
+// ===== ENQUIRY FORM SUBMISSION =====
 if (enquiryForm) {
-  enquiryForm.addEventListener('submit', async (e) => {
+  enquiryForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
     // Basic validation
@@ -144,34 +153,10 @@ if (enquiryForm) {
       return;
     }
 
-    // Submit via Web3Forms
+    // Submit natively (no CORS issues)
     submitBtn.classList.add('loading');
     submitBtn.querySelector('span').textContent = 'Sending…';
-
-    try {
-      const formData = new FormData(enquiryForm);
-      const response = await fetch('https://formsubmit.co/ajax/thescholars76@gmail.com', {
-        method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: formData
-      });
-      const result = await response.json();
-
-      if (result.success === 'true' || result.success === true) {
-        enquiryForm.reset();
-        if (successMsg) {
-          successMsg.classList.add('show');
-          successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      } else {
-        alert('Something went wrong. Please call us directly at +91 89358 92735.');
-      }
-    } catch (err) {
-      alert('Network error. Please call us at +91 89358 92735.');
-    } finally {
-      submitBtn.classList.remove('loading');
-      submitBtn.querySelector('span').textContent = 'Submit Enquiry';
-    }
+    enquiryForm.submit();
   });
 
   // Clear error styles on input

@@ -6,9 +6,7 @@
   <title>Enquiry – The Scholars Academy, Gopalganj</title>
   <meta name="description" content="Fill out the enquiry form to get free counselling for IIT JEE, NEET, Foundation and board exam coaching at The Scholars Academy, Gopalganj." />
   <!-- Security meta tags -->
-  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
-  <meta name="referrer" content="strict-origin-when-cross-origin" />
+      <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()" />
   <!-- Canonical -->
   <link rel="canonical" href="https://thescholarsacademy.in/enquiry.html" />
@@ -121,11 +119,12 @@
             🎉 Thank you! Your enquiry has been submitted. We will call you within 24 hours.
           </div>
 
-          <form id="enquiryForm" novalidate>
-            <!-- Formsubmit config (no account/domain required) -->
+          <form id="enquiryForm" action="https://formsubmit.co/thescholars76@gmail.com" method="POST" novalidate>
+            <!-- Formsubmit config -->
             <input type="hidden" name="_subject" value="📋 New Enquiry – The Scholars Academy" />
             <input type="hidden" name="_captcha" value="false" />
             <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_next" value="https://thescholarsacademy.in/enquiry.html?sent=true" />
             <input type="text" name="_honey" style="display:none" />
             <div class="form-grid">
               <!-- Student Name -->
@@ -315,6 +314,7 @@
   <script src="main.js"></script>
 </body>
 </html>
+
 
 
 
