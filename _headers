@@ -4,3 +4,15 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), microphone=(), camera=()
   X-XSS-Protection: 1; mode=block
+
+/favicon.ico
+  Content-Type: image/x-icon
+  Cache-Control: public, max-age=604800
+
+/favicon-32x32.png
+  Content-Type: image/png
+  Cache-Control: public, max-age=604800
+
+/favicon-16x16.png
+  Content-Type: image/png
+  Cache-Control: public, max-age=604800
