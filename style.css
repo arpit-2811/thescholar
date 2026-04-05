@@ -243,6 +243,21 @@ body {
   transform: scale(1.05);
 }
 
+/* ===== TEAM ===== */
+.team { background: var(--white); }
+.team-visual {
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(15,36,71,0.1);
+  border: 1px solid rgba(15,36,71,0.08);
+  margin-top: 2rem;
+}
+.team-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 /* ===== ABOUT ===== */
 .about { background: var(--bg-light); }
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
