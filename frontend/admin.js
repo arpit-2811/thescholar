@@ -5,7 +5,7 @@
    ────────────────────────────────────────────────────────── */
 
 // ── Constants ─────────────────────────────────────────────
-const API_BASE   = 'https://thescholars-api.onrender.com';
+const API_BASE   = 'https://thescholar.onrender.com';
 const TOKEN_KEY  = 'tsa_admin_token';
 const USER_KEY   = 'tsa_admin_username';
 

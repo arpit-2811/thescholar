@@ -1,6 +1,6 @@
 // ===== BACKEND API BASE URL ============================
 // Update this once you deploy to Render.com
-const API_BASE = 'https://thescholars-api.onrender.com';
+const API_BASE = 'https://thescholar.onrender.com';
 
 // ===== NAVBAR SCROLL EFFECT =====
 const navbar = document.getElementById('navbar');
