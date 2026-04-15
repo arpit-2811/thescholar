@@ -14,7 +14,10 @@ function initFirebase() {
       projectId  : process.env.FIREBASE_PROJECT_ID,
       clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
       // Render stores the key as a single line with literal \n – we restore them
-      privateKey : (process.env.FIREBASE_PRIVATE_KEY || '').replace(/\\n/g, '\n'),
+      // Also remove any surrounding double quotes if accidentally pasted from JSON
+      privateKey : (process.env.FIREBASE_PRIVATE_KEY || '')
+                     .replace(/^"|"$/g, '')
+                     .replace(/\\n/g, '\n'),
     }),
   });
 
