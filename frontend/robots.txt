@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Block admin pages from search engine indexing
+Disallow: /tsa-admin-portal.html
+Disallow: /tsa-admin-dashboard.html
+
+Sitemap: https://thescholarsacademy.in/sitemap.xml

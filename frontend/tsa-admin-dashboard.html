@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard – The Scholars Academy</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+
+<!-- ═══════════════════ LAYOUT ══════════════════════════ -->
+<div class="admin-layout">
+
+  <!-- ── Sidebar ──────────────────────────────────────── -->
+  <aside class="sidebar" id="sidebar">
+
+    <div class="sidebar-brand">
+      <img src="thescholarslogo.png" alt="TSA Logo" class="sidebar-logo" />
+      <div class="sidebar-brand-text">
+        <span class="sidebar-brand-title">The Scholars</span>
+        Admin Panel
+      </div>
+    </div>
+
+    <nav class="sidebar-nav" id="sidebarNav" role="navigation" aria-label="Admin navigation">
+      <button class="sidebar-nav-item active" data-section="overviewSection" id="navOverview">
+        <span class="nav-icon">📊</span> Overview
+      </button>
+      <button class="sidebar-nav-item" data-section="enquiriesSection" id="navEnquiries">
+        <span class="nav-icon">📋</span> Enquiries
+      </button>
+      <button class="sidebar-nav-item" data-section="admissionsSection" id="navAdmissions">
+        <span class="nav-icon">🎓</span> Admissions
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-admin-info">
+        <div class="admin-avatar" id="adminAvatarInitial">A</div>
+        <div class="admin-meta">
+          <span class="admin-name" id="adminUsername">Admin</span>
+          <span class="admin-role">Super Admin</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── Main Content ──────────────────────────────────── -->
+  <div class="main-content">
+
+    <!-- Header -->
+    <header class="main-header">
+      <div class="header-left">
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">☰</button>
+        <h1 class="page-title" id="pageTitle">Overview</h1>
+      </div>
+      <button class="btn-logout" id="logoutBtn">⎋ Logout</button>
+    </header>
+
+    <!-- Content Area -->
+    <main class="content-area">
+
+      <!-- ═══════════ OVERVIEW SECTION ═══════════ -->
+      <section class="section active" id="overviewSection">
+
+        <!-- Stat Cards -->
+        <div class="stat-cards">
+          <div class="stat-card blue">
+            <div class="stat-icon">📋</div>
+            <div class="stat-label">Total Enquiries</div>
+            <div class="stat-value" id="statEnquiries">—</div>
+            <div class="stat-sub">All time</div>
+          </div>
+          <div class="stat-card green">
+            <div class="stat-icon">🎓</div>
+            <div class="stat-label">Total Admissions</div>
+            <div class="stat-value" id="statAdmissions">—</div>
+            <div class="stat-sub">Active students</div>
+          </div>
+          <div class="stat-card orange">
+            <div class="stat-icon">🌟</div>
+            <div class="stat-label">New Today</div>
+            <div class="stat-value" id="statToday">—</div>
+            <div class="stat-sub">Enquiries received</div>
+          </div>
+          <div class="stat-card purple">
+            <div class="stat-icon">✅</div>
+            <div class="stat-label">Converted</div>
+            <div class="stat-value" id="statConverted">—</div>
+            <div class="stat-sub">Enquiries → admissions</div>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="section-header" style="margin-top:1rem;">
+          <h2>Quick Actions</h2>
+        </div>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+          <button class="btn btn-gold" onclick="showSection('enquiriesSection')">📋 View Enquiries</button>
+          <button class="btn btn-gold" onclick="showSection('admissionsSection')">🎓 View Admissions</button>
+          <button class="btn btn-secondary" id="addEnquiryBtnOverview">+ Add Enquiry</button>
+        </div>
+
+      </section>
+
+      <!-- ═══════════ ENQUIRIES SECTION ═══════════ -->
+      <section class="section" id="enquiriesSection">
+
+        <div class="section-header">
+          <h2>📋 Enquiries</h2>
+          <div class="section-tools">
+            <input
+              type="text"
+              class="search-input"
+              id="enquirySearch"
+              placeholder="🔍 Search name / phone…"
+              aria-label="Search enquiries"
+            />
+            <select class="filter-select" id="statusFilter" aria-label="Filter by status">
+              <option value="">All Status</option>
+              <option value="new">New</option>
+              <option value="contacted">Contacted</option>
+              <option value="converted">Converted</option>
+              <option value="rejected">Rejected</option>
+            </select>
+            <button class="btn btn-gold" id="addEnquiryBtn">+ Add Enquiry</button>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="admin-table" id="enquiriesTable">
+            <thead>
+              <tr>
+                <th>Student</th>
+                <th>Phone</th>
+                <th>Class</th>
+                <th>Course</th>
+                <th>Date</th>
+                <th>Source</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="enquiriesTableBody">
+              <!-- Populated by admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ═══════════ ADMISSIONS SECTION ═══════════ -->
+      <section class="section" id="admissionsSection">
+
+        <div class="section-header">
+          <h2>🎓 Admissions</h2>
+          <div class="section-tools">
+            <input
+              type="text"
+              class="search-input"
+              id="admissionSearch"
+              placeholder="🔍 Search name…"
+              aria-label="Search admissions"
+            />
+          </div>
+        </div>
+
+        <div class="admissions-grid" id="admissionsGrid">
+          <!-- Populated by admin.js -->
+        </div>
+      </section>
+
+    </main>
+  </div><!-- /.main-content -->
+</div><!-- /.admin-layout -->
+
+<!-- ═══════════ ADD ENQUIRY MODAL ═══════════ -->
+<div class="modal-overlay" id="addEnquiryModal" role="dialog" aria-modal="true" aria-labelledby="addEnqTitle">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="addEnqTitle">➕ Add New Enquiry</h3>
+      <button class="modal-close" onclick="Modal.close('addEnquiryModal')" aria-label="Close">✕</button>
+    </div>
+    <form id="addEnquiryForm">
+      <div class="form-grid2">
+        <div class="form-group">
+          <label for="enqStudentName">Student Name *</label>
+          <input type="text" id="enqStudentName" name="studentName" placeholder="Full name" required />
+        </div>
+        <div class="form-group">
+          <label for="enqParentName">Parent Name</label>
+          <input type="text" id="enqParentName" name="parentName" placeholder="Parent / guardian" />
+        </div>
+        <div class="form-group">
+          <label for="enqPhone">Contact Number *</label>
+          <input type="tel" id="enqPhone" name="phone" placeholder="+91 XXXXX XXXXX" required />
+        </div>
+        <div class="form-group">
+          <label for="enqAltPhone">Alternate Number</label>
+          <input type="tel" id="enqAltPhone" name="altPhone" placeholder="+91 XXXXX XXXXX" />
+        </div>
+        <div class="form-group">
+          <label for="enqEmail">Email</label>
+          <input type="email" id="enqEmail" name="email" placeholder="example@email.com" />
+        </div>
+        <div class="form-group">
+          <label for="enqCity">City / Area</label>
+          <input type="text" id="enqCity" name="city" placeholder="e.g. Gopalganj" />
+        </div>
+        <div class="form-group">
+          <label for="enqClass">Class Applied *</label>
+          <select id="enqClass" name="classApplied" required>
+            <option value="" disabled selected>Select class</option>
+            <option>Class 1</option><option>Class 2</option><option>Class 3</option>
+            <option>Class 4</option><option>Class 5</option><option>Class 6</option>
+            <option>Class 7</option><option>Class 8</option><option>Class 9</option>
+            <option>Class 10</option><option>Class 11</option><option>Class 12</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="enqCourse">Course *</label>
+          <select id="enqCourse" name="course" required>
+            <option value="" disabled selected>Select course</option>
+            <option>All Subjects (Class 1–5)</option>
+            <option>Science, Maths, SST, English (Class 6–10)</option>
+            <option>Class 11–12 (BSEB Board)</option>
+            <option>Class 11–12 (CBSE Board)</option>
+            <option>IIT JEE (Mains &amp; Advanced)</option>
+            <option>NEET UG Preparation</option>
+            <option>Foundation Batch</option>
+            <option>Pre-Foundation Batch</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="enqBoard">Board</label>
+          <select id="enqBoard" name="board">
+            <option value="">Select board</option>
+            <option>BSEB (Bihar Board)</option>
+            <option>CBSE</option>
+            <option>ICSE</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="enqSource">How did they hear</label>
+          <select id="enqSource" name="source">
+            <option value="">Select source</option>
+            <option>Friend / Family</option>
+            <option>Social Media</option>
+            <option>Pamphlet / Poster</option>
+            <option>Google Search</option>
+            <option>Word of Mouth</option>
+            <option>Walk-in</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label for="enqMessage">Notes / Message</label>
+          <textarea id="enqMessage" name="message" placeholder="Additional notes…"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" onclick="Modal.close('addEnquiryModal')">Cancel</button>
+        <button type="submit" class="btn-submit" id="addEnquirySubmitBtn">Add Enquiry</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ═══════════ ADD NOTE MODAL ═══════════ -->
+<div class="modal-overlay" id="addNoteModal" role="dialog" aria-modal="true" aria-labelledby="addNoteTitle">
+  <div class="modal" style="max-width:420px;">
+    <div class="modal-header">
+      <h3 id="addNoteTitle">📝 Add Payment Note</h3>
+      <button class="modal-close" onclick="Modal.close('addNoteModal')" aria-label="Close">✕</button>
+    </div>
+    <form id="addNoteForm">
+      <input type="hidden" id="noteAdmissionId" name="admissionId" />
+      <div class="form-grid2" style="grid-template-columns:1fr;">
+        <div class="form-group">
+          <label for="noteText">Note *</label>
+          <textarea
+            id="noteText" name="text"
+            placeholder="e.g. ₹5000 paid – first instalment. ₹3000 remaining."
+            required
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <label for="noteType">Note Type</label>
+          <select id="noteType" name="type">
+            <option value="payment">💰 Payment</option>
+            <option value="reminder">🔔 Reminder</option>
+            <option value="general">📌 General</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="noteDate">Date</label>
+          <input type="date" id="noteDate" name="date" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" onclick="Modal.close('addNoteModal')">Cancel</button>
+        <button type="submit" class="btn-submit" id="addNoteSubmitBtn">Add Note</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ═══════════ TOAST CONTAINER ═══════════ -->
+<div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="false"></div>
+
+<script src="admin.js"></script>
+</body>
+</html>

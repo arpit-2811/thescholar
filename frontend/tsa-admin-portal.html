@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Portal – The Scholars Academy</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body class="login-body">
+
+  <!-- Animated background blobs -->
+  <div class="login-bg">
+    <div class="bg-circle c1"></div>
+    <div class="bg-circle c2"></div>
+    <div class="bg-circle c3"></div>
+  </div>
+
+  <div class="login-center">
+    <div class="login-card">
+
+      <!-- Logo -->
+      <div class="login-logo">
+        <img src="thescholarslogo.png" alt="The Scholars Academy" />
+      </div>
+
+      <h1 class="login-title">Admin Portal</h1>
+      <p class="login-subtitle">The Scholars Academy · Gopalganj</p>
+
+      <!-- Error message -->
+      <div id="loginError" class="login-error" style="display:none"></div>
+
+      <form id="loginForm" class="login-form" autocomplete="on">
+        <div class="login-field">
+          <label for="username">Admin ID</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Enter admin ID"
+            autocomplete="username"
+            inputmode="numeric"
+            required
+          />
+        </div>
+
+        <div class="login-field">
+          <label for="password">Password</label>
+          <div class="password-wrap">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter password"
+              autocomplete="current-password"
+              required
+            />
+            <button type="button" class="eye-toggle" id="eyeToggle" aria-label="Toggle password visibility">
+              👁️
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-login" id="loginBtn">
+          <span id="loginBtnText">Login to Dashboard</span>
+          <span id="loginSpinner" style="display:none">Authenticating…</span>
+        </button>
+      </form>
+
+      <p class="login-footer">🔒 Secure admin access · Not for public use</p>
+    </div>
+  </div>
+
+  <script>
+    'use strict';
+    const API_BASE   = 'https://thescholars-api.onrender.com';
+    const TOKEN_KEY  = 'tsa_admin_token';
+
+    // Already logged in? skip to dashboard
+    if (sessionStorage.getItem(TOKEN_KEY)) {
+      window.location.replace('tsa-admin-dashboard.html');
+    }
+
+    // ── Password eye toggle ────────────────────────────────
+    document.getElementById('eyeToggle').addEventListener('click', function () {
+      const inp = document.getElementById('password');
+      inp.type = (inp.type === 'password') ? 'text' : 'password';
+      this.textContent = (inp.type === 'password') ? '👁️' : '🙈';
+    });
+
+    // ── Login form ─────────────────────────────────────────
+    document.getElementById('loginForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+      const errEl    = document.getElementById('loginError');
+      const btn      = document.getElementById('loginBtn');
+      const btnText  = document.getElementById('loginBtnText');
+      const spinner  = document.getElementById('loginSpinner');
+
+      // Reset error
+      errEl.style.display = 'none';
+
+      // Loading state
+      btn.disabled          = true;
+      btnText.style.display = 'none';
+      spinner.style.display = 'inline';
+
+      try {
+        const res = await fetch(`${API_BASE}/api/auth/login`, {
+          method : 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body   : JSON.stringify({ username, password }),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) throw new Error(data.error || 'Invalid credentials');
+
+        // Store token and redirect
+        sessionStorage.setItem(TOKEN_KEY, data.token);
+        sessionStorage.setItem('tsa_admin_username', data.username);
+        window.location.href = 'tsa-admin-dashboard.html';
+
+      } catch (err) {
+        errEl.textContent    = '❌ ' + (err.message || 'Login failed. Please try again.');
+        errEl.style.display  = 'block';
+        btn.disabled          = false;
+        btnText.style.display = 'inline';
+        spinner.style.display = 'none';
+
+        // Shake animation via re-add class
+        errEl.classList.remove('shake');
+        void errEl.offsetWidth;
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,3 +1,7 @@
+// ===== BACKEND API BASE URL ============================
+// Update this once you deploy to Render.com
+const API_BASE = 'https://thescholars-api.onrender.com';
+
 // ===== NAVBAR SCROLL EFFECT =====
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
@@ -117,25 +121,17 @@ window.addEventListener('scroll', () => {
   });
 });
 
-// ===== ENQUIRY FORM SUBMISSION =====
+// ===== ENQUIRY FORM SUBMISSION (fetch → backend API) =====
 const enquiryForm = document.getElementById('enquiryForm');
 const successMsg  = document.getElementById('successMsg');
 const submitBtn   = document.getElementById('submitBtn');
+const submitBtnText = document.getElementById('submitBtnText');
 
-// ===== SHOW SUCCESS IF REDIRECTED BACK FROM FORMSUBMIT =====
-if (window.location.search.includes('sent=true') && successMsg) {
-  successMsg.classList.add('show');
-  successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  // Clean up the URL
-  window.history.replaceState({}, document.title, window.location.pathname);
-}
-
-// ===== ENQUIRY FORM SUBMISSION =====
 if (enquiryForm) {
-  enquiryForm.addEventListener('submit', (e) => {
+  enquiryForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Basic validation
+    // ── Basic validation ────────────────────────────────
     const required = enquiryForm.querySelectorAll('[required]');
     let valid = true;
     required.forEach(field => {
@@ -153,10 +149,40 @@ if (enquiryForm) {
       return;
     }
 
-    // Submit natively (no CORS issues)
-    submitBtn.classList.add('loading');
-    submitBtn.querySelector('span').textContent = 'Sending…';
-    enquiryForm.submit();
+    // ── Loading state ───────────────────────────────────
+    submitBtn.disabled = true;
+    if (submitBtnText) submitBtnText.textContent = 'Sending…';
+
+    // ── Collect form data ───────────────────────────────
+    const data = Object.fromEntries(new FormData(enquiryForm));
+
+    // ── POST to backend API ─────────────────────────────
+    try {
+      const res = await fetch(`${API_BASE}/api/enquiries`, {
+        method : 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body   : JSON.stringify(data),
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error || 'Submission failed');
+      }
+
+      // ── Success ─────────────────────────────────────
+      enquiryForm.reset();
+      if (successMsg) {
+        successMsg.classList.add('show');
+        successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+
+    } catch (err) {
+      // ── Error (show to user) ─────────────────────────
+      alert('⚠️ Could not submit enquiry: ' + (err.message || 'Server error. Please call us directly.'));
+    } finally {
+      submitBtn.disabled = false;
+      if (submitBtnText) submitBtnText.textContent = 'Submit Enquiry';
+    }
   });
 
   // Clear error styles on input
