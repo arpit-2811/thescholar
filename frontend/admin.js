@@ -446,6 +446,28 @@ async function handleDeleteAdmission(id) {
 }
 window.handleDeleteAdmission = handleDeleteAdmission;
 
+async function handleAddAdmission(e) {
+  e.preventDefault();
+  const form = document.getElementById('addAdmissionForm');
+  const data = Object.fromEntries(new FormData(form));
+  const btn  = document.getElementById('addAdmissionSubmitBtn');
+
+  try {
+    btn.disabled    = true;
+    btn.textContent = 'Adding…';
+    await api('POST', '/api/admissions', data);
+    Toast.show('Admission added successfully!');
+    Modal.close('addAdmissionModal');
+    form.reset();
+    loadAdmissions();
+  } catch (err) {
+    Toast.show(err.message || 'Failed to add admission', 'error');
+  } finally {
+    btn.disabled    = false;
+    btn.textContent = 'Create Admission';
+  }
+}
+
 async function handleAddNote(e) {
   e.preventDefault();
   if (!_activeNoteId) return;
@@ -533,8 +555,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('addEnquiryBtn')?.addEventListener('click', () => Modal.open('addEnquiryModal'));
   document.getElementById('addEnquiryBtnOverview')?.addEventListener('click', () => Modal.open('addEnquiryModal'));
 
+  // ── Add Admission button ───────────────────────────────
+  document.getElementById('addAdmissionBtn')?.addEventListener('click', () => Modal.open('addAdmissionModal'));
+
   // ── Add Enquiry form ───────────────────────────────────
   document.getElementById('addEnquiryForm')?.addEventListener('submit', handleAddEnquiry);
+
+  // ── Add Admission form ─────────────────────────────────
+  document.getElementById('addAdmissionForm')?.addEventListener('submit', handleAddAdmission);
 
   // ── Add Note form ──────────────────────────────────────
   document.getElementById('addNoteForm')?.addEventListener('submit', handleAddNote);

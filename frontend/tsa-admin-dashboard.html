@@ -163,6 +163,7 @@
               placeholder="🔍 Search name…"
               aria-label="Search admissions"
             />
+            <button class="btn btn-gold" id="addAdmissionBtn">+ Add Admission</button>
           </div>
         </div>
 
@@ -264,6 +265,87 @@
       <div class="modal-footer">
         <button type="button" class="btn-cancel" onclick="Modal.close('addEnquiryModal')">Cancel</button>
         <button type="submit" class="btn-submit" id="addEnquirySubmitBtn">Add Enquiry</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ═══════════ ADD ADMISSION MODAL ═══════════ -->
+<div class="modal-overlay" id="addAdmissionModal" role="dialog" aria-modal="true" aria-labelledby="addAdmTitle">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="addAdmTitle">🎓 Direct Add Admission</h3>
+      <button class="modal-close" onclick="Modal.close('addAdmissionModal')" aria-label="Close">✕</button>
+    </div>
+    <form id="addAdmissionForm">
+      <div class="form-grid2">
+        <div class="form-group">
+          <label for="admStudentName">Student Name *</label>
+          <input type="text" id="admStudentName" name="studentName" placeholder="Full name" required />
+        </div>
+        <div class="form-group">
+          <label for="admParentName">Parent Name</label>
+          <input type="text" id="admParentName" name="parentName" placeholder="Parent / guardian" />
+        </div>
+        <div class="form-group">
+          <label for="admPhone">Contact Number *</label>
+          <input type="tel" id="admPhone" name="phone" placeholder="+91 XXXXX XXXXX" required />
+        </div>
+        <div class="form-group">
+          <label for="admAltPhone">Alternate Number</label>
+          <input type="tel" id="admAltPhone" name="altPhone" placeholder="+91 XXXXX XXXXX" />
+        </div>
+        <div class="form-group">
+          <label for="admEmail">Email</label>
+          <input type="email" id="admEmail" name="email" placeholder="example@email.com" />
+        </div>
+        <div class="form-group">
+          <label for="admCity">City / Area</label>
+          <input type="text" id="admCity" name="city" placeholder="e.g. Gopalganj" />
+        </div>
+        <div class="form-group">
+          <label for="admClass">Class *</label>
+          <select id="admClass" name="classApplied" required>
+            <option value="" disabled selected>Select class</option>
+            <option>Class 1</option><option>Class 2</option><option>Class 3</option>
+            <option>Class 4</option><option>Class 5</option><option>Class 6</option>
+            <option>Class 7</option><option>Class 8</option><option>Class 9</option>
+            <option>Class 10</option><option>Class 11</option><option>Class 12</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="admCourse">Course *</label>
+          <select id="admCourse" name="course" required>
+            <option value="" disabled selected>Select course</option>
+            <option>All Subjects (Class 1–5)</option>
+            <option>Science, Maths, SST, English (Class 6–10)</option>
+            <option>Class 11–12 (BSEB Board)</option>
+            <option>Class 11–12 (CBSE Board)</option>
+            <option>IIT JEE (Mains &amp; Advanced)</option>
+            <option>NEET UG Preparation</option>
+            <option>Foundation Batch</option>
+            <option>Pre-Foundation Batch</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="admBoard">Board</label>
+          <select id="admBoard" name="board">
+            <option value="">Select board</option>
+            <option>BSEB (Bihar Board)</option>
+            <option>CBSE</option>
+            <option>ICSE</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="admTotalFee">Total Course Fee (₹)</label>
+          <input type="number" id="admTotalFee" name="totalFee" placeholder="E.g. 15000" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" onclick="Modal.close('addAdmissionModal')">Cancel</button>
+        <button type="submit" class="btn-submit" id="addAdmissionSubmitBtn">Create Admission</button>
       </div>
     </form>
   </div>
