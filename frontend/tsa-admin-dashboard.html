@@ -351,6 +351,96 @@
   </div>
 </div>
 
+<!-- ═══════════ EDIT ADMISSION MODAL ═══════════ -->
+<div class="modal-overlay" id="editAdmissionModal" role="dialog" aria-modal="true" aria-labelledby="editAdmTitle">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="editAdmTitle">✏️ Edit Admission Details</h3>
+      <button class="modal-close" onclick="Modal.close('editAdmissionModal')" aria-label="Close">✕</button>
+    </div>
+    <form id="editAdmissionForm">
+      <input type="hidden" id="editAdmId" name="id" />
+      <div class="form-grid2">
+        <div class="form-group">
+          <label for="editAdmStudentName">Student Name *</label>
+          <input type="text" id="editAdmStudentName" name="studentName" placeholder="Full name" required />
+        </div>
+        <div class="form-group">
+          <label for="editAdmParentName">Parent Name</label>
+          <input type="text" id="editAdmParentName" name="parentName" placeholder="Parent / guardian" />
+        </div>
+        <div class="form-group">
+          <label for="editAdmPhone">Contact Number *</label>
+          <input type="tel" id="editAdmPhone" name="phone" placeholder="+91 XXXXX XXXXX" required />
+        </div>
+        <div class="form-group">
+          <label for="editAdmAltPhone">Alternate Number</label>
+          <input type="tel" id="editAdmAltPhone" name="altPhone" placeholder="+91 XXXXX XXXXX" />
+        </div>
+        <div class="form-group">
+          <label for="editAdmEmail">Email</label>
+          <input type="email" id="editAdmEmail" name="email" placeholder="example@email.com" />
+        </div>
+        <div class="form-group">
+          <label for="editAdmCity">City / Area</label>
+          <input type="text" id="editAdmCity" name="city" placeholder="e.g. Gopalganj" />
+        </div>
+        <div class="form-group">
+          <label for="editAdmClass">Class *</label>
+          <select id="editAdmClass" name="classApplied" required>
+            <option value="" disabled selected>Select class</option>
+            <option>Class 1</option><option>Class 2</option><option>Class 3</option>
+            <option>Class 4</option><option>Class 5</option><option>Class 6</option>
+            <option>Class 7</option><option>Class 8</option><option>Class 9</option>
+            <option>Class 10</option><option>Class 11</option><option>Class 12</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="editAdmCourse">Course *</label>
+          <select id="editAdmCourse" name="course" required>
+            <option value="" disabled selected>Select course</option>
+            <option>All Subjects (Class 1–5)</option>
+            <option>Science, Maths, SST, English (Class 6–10)</option>
+            <option>Class 11–12 (BSEB Board)</option>
+            <option>Class 11–12 (CBSE Board)</option>
+            <option>IIT JEE (Mains &amp; Advanced)</option>
+            <option>NEET UG Preparation</option>
+            <option>Foundation Batch</option>
+            <option>Pre-Foundation Batch</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="editAdmBoard">Board</label>
+          <select id="editAdmBoard" name="board">
+            <option value="">Select board</option>
+            <option>BSEB (Bihar Board)</option>
+            <option>CBSE</option>
+            <option>ICSE</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="editAdmTotalFee">Total Course Fee (₹)</label>
+          <input type="number" id="editAdmTotalFee" name="totalFee" placeholder="E.g. 15000" />
+        </div>
+        <div class="form-group">
+          <label for="editAdmStatus">Status</label>
+          <select id="editAdmStatus" name="status">
+            <option value="active">Active</option>
+            <option value="completed">Completed</option>
+            <option value="dropped">Dropped</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" onclick="Modal.close('editAdmissionModal')">Cancel</button>
+        <button type="submit" class="btn-submit" id="editAdmissionSubmitBtn">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <!-- ═══════════ ADD NOTE MODAL ═══════════ -->
 <div class="modal-overlay" id="addNoteModal" role="dialog" aria-modal="true" aria-labelledby="addNoteTitle">
   <div class="modal" style="max-width:420px;">

@@ -386,6 +386,9 @@ function renderAdmissions(admissions) {
         </div>
 
         <div class="admission-actions">
+          <button class="btn-action btn-edit" style="width:auto;padding:0.45rem 0.9rem;font-size:0.78rem;border-radius:6px;margin-right:0.5rem;background:#fff9e6;color:#cca000;border:1px solid #cca000;" onclick="openEditAdmission('${a.id}')">
+            ✏️ Edit Details
+          </button>
           <button class="btn-action btn-delete" style="width:auto;padding:0.45rem 0.9rem;font-size:0.78rem;border-radius:6px;" onclick="handleDeleteAdmission('${a.id}')">
             🗑️ Delete Record
           </button>
@@ -425,6 +428,53 @@ function toggleCard(id) {
   }
 }
 window.toggleCard = toggleCard;
+
+function openEditAdmission(id) {
+  const admission = _allAdmissions.find(a => a.id === id);
+  if (!admission) return;
+
+  document.getElementById('editAdmId').value = admission.id;
+  document.getElementById('editAdmStudentName').value = admission.studentName || '';
+  document.getElementById('editAdmParentName').value = admission.parentName || '';
+  document.getElementById('editAdmPhone').value = admission.phone || '';
+  document.getElementById('editAdmAltPhone').value = admission.altPhone || '';
+  document.getElementById('editAdmEmail').value = admission.email || '';
+  document.getElementById('editAdmCity').value = admission.city || '';
+  document.getElementById('editAdmClass').value = admission.classApplied || '';
+  document.getElementById('editAdmCourse').value = admission.course || '';
+  document.getElementById('editAdmBoard').value = admission.board || '';
+  document.getElementById('editAdmTotalFee').value = admission.totalFee || '';
+  document.getElementById('editAdmStatus').value = admission.status || 'active';
+
+  Modal.open('editAdmissionModal');
+}
+window.openEditAdmission = openEditAdmission;
+
+async function handleEditAdmission(e) {
+  e.preventDefault();
+  const form = document.getElementById('editAdmissionForm');
+  const data = Object.fromEntries(new FormData(form));
+  const id = data.id;
+  delete data.id; // remove id from payload body
+  
+  // convert fee string to number
+  if (data.totalFee) data.totalFee = Number(data.totalFee);
+
+  const btn = document.getElementById('editAdmissionSubmitBtn');
+  try {
+    btn.disabled = true;
+    btn.textContent = 'Saving…';
+    await api('PUT', `/api/admissions/${id}`, data);
+    Toast.show('Admission updated successfully!');
+    Modal.close('editAdmissionModal');
+    loadAdmissions();
+  } catch (err) {
+    Toast.show(err.message || 'Failed to update admission', 'error');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Save Changes';
+  }
+}
 
 function openAddNote(admissionId) {
   _activeNoteId = admissionId;
@@ -615,6 +665,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // ── Add Admission form ─────────────────────────────────
   document.getElementById('addAdmissionForm')?.addEventListener('submit', handleAddAdmission);
+
+  // ── Edit Admission form ────────────────────────────────
+  document.getElementById('editAdmissionForm')?.addEventListener('submit', handleEditAdmission);
 
   // ── Add Note form ──────────────────────────────────────
   document.getElementById('addNoteForm')?.addEventListener('submit', handleAddNote);
