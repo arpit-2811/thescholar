@@ -132,6 +132,47 @@ router.post('/:id/notes', authMiddleware, async (req, res) => {
   }
 });
 
+// ── PUT /api/admissions/:id/notes/:noteId  (PROTECTED – edit note) ─
+router.put('/:id/notes/:noteId', authMiddleware, async (req, res) => {
+  try {
+    const { text, type, date } = req.body;
+
+    if (!text) {
+      return res.status(400).json({ error: 'Note text is required.' });
+    }
+
+    const validTypes = ['payment', 'reminder', 'general'];
+    const noteType   = validTypes.includes(type) ? type : 'general';
+
+    const db  = getDb();
+    const ref = db.collection('admissions').doc(req.params.id);
+    const doc = await ref.get();
+
+    if (!doc.exists) return res.status(404).json({ error: 'Admission not found.' });
+
+    const notes = doc.data().notes || [];
+    const noteIndex = notes.findIndex(n => n.id === req.params.noteId);
+    
+    if (noteIndex === -1) {
+      return res.status(404).json({ error: 'Note not found.' });
+    }
+
+    notes[noteIndex] = {
+      ...notes[noteIndex],
+      text: String(text).trim(),
+      type: noteType,
+      date: date || notes[noteIndex].date || nowISO(),
+    };
+
+    await ref.update({ notes, updatedAt: nowISO() });
+    res.json({ message: 'Note updated.', note: notes[noteIndex] });
+
+  } catch (err) {
+    console.error('PUT /admissions/:id/notes/:noteId error:', err);
+    res.status(500).json({ error: 'Server error.' });
+  }
+});
+
 // ── DELETE /api/admissions/:id/notes/:noteId  (PROTECTED) ─
 router.delete('/:id/notes/:noteId', authMiddleware, async (req, res) => {
   try {

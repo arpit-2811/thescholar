@@ -390,6 +390,45 @@
   </div>
 </div>
 
+<!-- ═══════════ EDIT NOTE MODAL ═══════════ -->
+<div class="modal-overlay" id="editNoteModal" role="dialog" aria-modal="true" aria-labelledby="editNoteTitle">
+  <div class="modal" style="max-width:420px;">
+    <div class="modal-header">
+      <h3 id="editNoteTitle">📝 Edit Payment Note</h3>
+      <button class="modal-close" onclick="Modal.close('editNoteModal')" aria-label="Close">✕</button>
+    </div>
+    <form id="editNoteForm">
+      <input type="hidden" id="editNoteAdmissionId" name="admissionId" />
+      <input type="hidden" id="editNoteId" name="noteId" />
+      <div class="form-grid2" style="grid-template-columns:1fr;">
+        <div class="form-group">
+          <label for="editNoteText">Note *</label>
+          <textarea
+            id="editNoteText" name="text"
+            required
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <label for="editNoteType">Note Type</label>
+          <select id="editNoteType" name="type">
+            <option value="payment">💰 Payment</option>
+            <option value="reminder">🔔 Reminder</option>
+            <option value="general">📌 General</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="editNoteDate">Date</label>
+          <input type="date" id="editNoteDate" name="date" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-cancel" onclick="Modal.close('editNoteModal')">Cancel</button>
+        <button type="submit" class="btn-submit" id="editNoteSubmitBtn">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <!-- ═══════════ TOAST CONTAINER ═══════════ -->
 <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="false"></div>
 

@@ -408,6 +408,7 @@ function renderNotes(notes, admissionId) {
           <span class="badge badge-${n.type === 'payment' ? 'success' : n.type === 'reminder' ? 'warning' : 'info'} badge-sm">
             ${n.type === 'payment' ? '💰' : n.type === 'reminder' ? '🔔' : '📌'} ${capitalize(n.type || 'general')}
           </span>
+          <button class="btn-icon-edit" onclick="openEditNote('${admissionId}','${n.id}')" title="Edit note" style="background:none;border:none;cursor:pointer;opacity:0.7;font-size:1.1em;margin-left:auto;margin-right:0.2rem;">✏️</button>
           <button class="btn-icon-delete" onclick="handleDeleteNote('${admissionId}','${n.id}')" title="Delete note">×</button>
         </div>
       </div>
@@ -491,6 +492,57 @@ async function handleAddNote(e) {
   }
 }
 
+function openEditNote(admissionId, noteId) {
+  _activeNoteId = admissionId;
+  const admission = _allAdmissions.find(a => a.id === admissionId);
+  if (!admission) return;
+  const note = (admission.notes || []).find(n => n.id === noteId);
+  if (!note) return;
+
+  const docData = document.getElementById('editNoteAdmissionId');
+  if (docData) docData.value = admissionId;
+  
+  const docNote = document.getElementById('editNoteId');
+  if (docNote) docNote.value = noteId;
+
+  document.getElementById('editNoteText').value = note.text;
+  document.getElementById('editNoteType').value = note.type || 'general';
+  
+  const d = new Date(note.date);
+  if (!isNaN(d.getTime())) {
+    document.getElementById('editNoteDate').value = d.toISOString().split('T')[0];
+  } else {
+    document.getElementById('editNoteDate').value = '';
+  }
+
+  Modal.open('editNoteModal');
+}
+window.openEditNote = openEditNote;
+
+async function handleEditNote(e) {
+  e.preventDefault();
+  const form = document.getElementById('editNoteForm');
+  const admissionId = document.getElementById('editNoteAdmissionId').value;
+  const noteId = document.getElementById('editNoteId').value;
+  const data = Object.fromEntries(new FormData(form));
+  const btn  = document.getElementById('editNoteSubmitBtn');
+
+  try {
+    btn.disabled    = true;
+    btn.textContent = 'Saving…';
+    await api('PUT', `/api/admissions/${admissionId}/notes/${noteId}`, data);
+    Toast.show('Note updated!');
+    Modal.close('editNoteModal');
+    form.reset();
+    loadAdmissions();
+  } catch (err) {
+    Toast.show(err.message || 'Failed to update note', 'error');
+  } finally {
+    btn.disabled    = false;
+    btn.textContent = 'Save Changes';
+  }
+}
+
 async function handleDeleteNote(admissionId, noteId) {
   if (!confirm('Delete this note?')) return;
   try {
@@ -566,6 +618,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // ── Add Note form ──────────────────────────────────────
   document.getElementById('addNoteForm')?.addEventListener('submit', handleAddNote);
+
+  // ── Edit Note form ─────────────────────────────────────
+  document.getElementById('editNoteForm')?.addEventListener('submit', handleEditNote);
 
   // ── Close modals on backdrop ───────────────────────────
   document.querySelectorAll('.modal-overlay').forEach(overlay => {
