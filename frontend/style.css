@@ -432,6 +432,8 @@ body {
 .footer-contact-col p a:hover { color: var(--gold-light); }
 .footer-bottom { text-align: center; padding: 1.25rem; }
 .footer-bottom p { color: rgba(255,255,255,0.35); font-size: 0.8rem; }
+.footer-bottom p a { color: inherit; text-decoration: underline; transition: color 0.2s; }
+.footer-bottom p a:hover { color: var(--gold-light); }
 
 /* ===== ENQUIRY PAGE ===== */
 .enquiry-hero {
